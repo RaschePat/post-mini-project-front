@@ -1,5 +1,15 @@
-import { css } from "@emotion/react";
-
+import { css, keyframes  } from "@emotion/react";
+export const gradientMove = keyframes`
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+`;
 export const layout = css`
     display: flex;
     justify-content: center;
@@ -24,6 +34,7 @@ export const frameContainer = css`
     border-radius: 10px;
     width: 100%;
     height: 100%;
+    border: 2px solid #333;
     background-color: #f3f5f7;
     overflow: hidden;
 `;
@@ -44,6 +55,7 @@ export const loadingBox = css`
 
 //////////<<LeftSideBar>>//////////
 export const sideBarLayout = css`
+    position: relative;
     display: flex;
     width: 100%;
     height: 100%;
@@ -55,16 +67,33 @@ export const sideBarContainer = css`
     width: 200px;
     height: 100%;
     background-color: #ffffff;
-
+    box-shadow: 0 0 6px -5px;
+    
     & > h1 {
         margin: 20px;
-        font-size: 20px;
+        margin-left: 15px;
+        font-size: 27px;
+        font-family: "Pacifico", cursive;
+        font-weight: 400;
+        font-style: normal;
         text-align: center;
-        text-shadow: 0 0 20px #00000099;
         cursor: default;
         transition: all 0.1s ease-in-out;
-        &:hover{
-            transform: scale(105%);
+        color: #202020ee;
+
+        &:hover {
+            background: linear-gradient(
+                -30deg,
+                #222222,
+                #bbbbbbff,
+                #222222
+            );
+            background-size: 400% 400%;
+            animation: ${gradientMove} 3s ease-in-out infinite;
+
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     }
 
@@ -72,7 +101,7 @@ export const sideBarContainer = css`
         list-style-type: none;
         display: flex;
         flex-direction: column;
-        padding: 0;
+        padding: 5px;
         margin: 0;
         gap: 8px;
         flex-grow: 1;
@@ -89,10 +118,13 @@ export const sideBarContainer = css`
         padding: 20px;
 
         & > a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3px;
             text-decoration: none;
             color: #222222;
             font-weight: 500;
-            text-shadow: 0 0 15px #000000;
         }
     }
 `;
@@ -117,15 +149,16 @@ export const menuListItem = (isSelected) => css`
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 5px;
+        margin-right: 3px;
         width: 30px;
         height: 100%;
-        font-size: 20px;
+        font-size: 25px;
     }
+    
 `;
 
 export const profileImg = (url) => css`
-    border: 2px solid #202020ee;
+    border: 2px solid #202020cc;
     box-sizing: border-box;
     border-radius: 50%;
     width: 26px;

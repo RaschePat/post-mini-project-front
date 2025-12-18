@@ -1,18 +1,30 @@
 /** @jsxImportSource @emotion/react */
 import { data, Link, useLocation } from "react-router-dom";
 import * as s from "./styles";
-import { IoHomeOutline , IoAddCircleOutline } from "react-icons/io5";
-import { MdOutlineExplore } from "react-icons/md";
+import { IoHomeOutline , IoAddCircleOutline, IoExitOutline } from "react-icons/io5";
+import { MdOutlineExplore , MdOutlineMessage  } from "react-icons/md";
 import { useMeQuery } from "../../queries/usersQueries";
+import { useRef, useState } from "react";
+import AddPostModal from "../post/AddPostModal";
 
 
 function LeftSideBar({children}){
     const location = useLocation();
     const {pathname} = location;
+    const [ addPostModalOpen, setAddPostModalOpen ] = useState(false);
+    const layoutRef = useRef();
 
     const {isLoading, data} = useMeQuery();
 
-    return <div css={s.sideBarLayout}>
+    const handleAddPostModalOpenOnClick = () => {
+        setAddPostModalOpen(true);
+    }
+
+    const addPostModalClose = () => {
+        setAddPostModalOpen(false);
+    }
+
+    return <div css={s.sideBarLayout} ref={layoutRef}>
         <aside css={s.sideBarContainer}>
             <h1>Social Board</h1>
             <ul>
@@ -22,8 +34,11 @@ function LeftSideBar({children}){
                 <Link to={"/search"}>
                     <li css={s.menuListItem(pathname === "/search")}><div><MdOutlineExplore/></div>Explore</li>
                 </Link>
-                <Link to={"/post/add"}>
-                    <li css={s.menuListItem(pathname === "/post/add")}><div><IoAddCircleOutline/></div>Add a Post</li>
+                <Link to={"/message"}>
+                    <li css={s.menuListItem(pathname === "/message")}><div><MdOutlineMessage/></div>Message</li>
+                </Link>
+                <Link>
+                    <li css={s.menuListItem(false)} onClick={handleAddPostModalOpenOnClick}><div><IoAddCircleOutline/></div>Add a Post</li>
                 </Link>
                 {
                     isLoading || <Link to={"/" + data.data.nickname}>
@@ -37,12 +52,19 @@ function LeftSideBar({children}){
                 }
             </ul>
             <div>
-                <Link to={"/logout"}>Logout</Link>
+                <Link to={"/logout"}><IoExitOutline />Logout</Link>
             </div>
         </aside>
         <div>
             {children}
         </div>
+        {
+            !!layoutRef.current &&
+            <AddPostModal
+            isOpen={addPostModalOpen}
+            onRequestClose={addPostModalClose}
+            layoutRef={layoutRef} />
+    }
     </div>
 }
 
