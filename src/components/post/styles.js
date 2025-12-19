@@ -45,7 +45,7 @@ export const modalLayout = css`
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             text-align: center;
         }
         & > button:last-child {
@@ -66,7 +66,7 @@ export const profileContainer = css`
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    padding: 0 10px;
+    padding: 0 0 0 10px;
     cursor: default;
 `;
 
@@ -78,11 +78,24 @@ export const profileImg = (url) => css`
     background-image: url(${url});
     background-position: center;
     background-size: cover;
+    
 `;
 
 export const contentInputBox = css`
     margin: 10px 0;
 
+    & > div{
+        display: flex;
+        align-items: center;
+        width: 80px;
+        padding: 2px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        margin-bottom: 3px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #202020ee;
+    }
     & > textarea {
         box-sizing: border-box;
         outline: none;
@@ -90,7 +103,7 @@ export const contentInputBox = css`
         border-radius: 4px;
         padding: 5px 10px;
         width: 100%;
-        height: 80px;
+        height: 120px;
         resize: none;
         font-family: "Noto Sans KR", sans-serif;
         font-size: 15px;
@@ -109,10 +122,7 @@ export const uploadBox = css`
     padding: 10px;
     cursor: pointer;
     color: #222222;
-
-    & > div {
-
-    }
+    font-size: 14px;
 
     & > button {
         display: flex;
@@ -125,6 +135,7 @@ export const uploadBox = css`
         cursor:pointer;
         background-color: #202020ee;
         color: white;
+
     }
 `;
 
@@ -196,4 +207,8 @@ export const preview = (url) => css`
         background-color: #202020ee;
         cursor: pointer;
     }
+`;
+
+export const profileName = css`
+    flex: 1;
 `;
