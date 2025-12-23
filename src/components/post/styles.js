@@ -60,6 +60,10 @@ export const postButton = css`
     padding: 0 15px;
     background-color: #202020ee;
     color: #ffffff;
+    &:disabled{
+        cursor: default;
+        background-color: #202020aa;
+    }
 `;
 
 export const profileContainer = css`
