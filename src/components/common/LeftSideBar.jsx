@@ -6,12 +6,15 @@ import { MdOutlineExplore , MdOutlineMessage  } from "react-icons/md";
 import { useMeQuery } from "../../queries/usersQueries";
 import { useEffect, useRef, useState } from "react";
 import AddPostModal from "../post/AddPostModal";
+import { RiChatSmileAiLine, RiCloseCircleLine, RiCloseLargeLine, RiCloseLine } from "react-icons/ri";
+import OpenaiApiModal from "../openai/OpenaiApiModal";
 
 
 function LeftSideBar({children}){
     const location = useLocation();
     const {pathname} = location;
     const [ addPostModalOpen, setAddPostModalOpen ] = useState(false);
+    const [ openaiModalOpen, setOpenaiModalOpen ] = useState(false);
     const [ homeRefresh, setHomeRefresh ] = useState(false); 
     const layoutRef = useRef();
 
@@ -23,6 +26,17 @@ function LeftSideBar({children}){
         }
     },[homeRefresh])
 
+    const handleEscKey = (e) => {
+        if (e.key === "Escape" && openaiModalOpen){
+            openaiModalClose();
+        }
+    }
+
+    useEffect(()=>{
+        document.addEventListener("keydown", handleEscKey);
+        return () => document.removeEventListener("keydown", handleEscKey);
+    }, [handleEscKey]);
+
     const handleAddPostModalOpenOnClick = () => {
         setAddPostModalOpen(true);
     }
@@ -31,6 +45,16 @@ function LeftSideBar({children}){
         setAddPostModalOpen(false);
     }
 
+    const handleOpenaiModalOpenOnClick = () => {
+        const isOpen = openaiModalOpen;
+        setOpenaiModalOpen(!isOpen);
+    }
+
+    const openaiModalClose = () => {
+        setOpenaiModalOpen(false);
+    }
+
+    
     return <div css={s.sideBarLayout} ref={layoutRef}>
         <aside css={s.sideBarContainer}>
             <h1>Social Board</h1>
@@ -71,6 +95,12 @@ function LeftSideBar({children}){
             layoutRef={layoutRef}
             setHomeRefresh={setHomeRefresh} />
         }
+        <div css={s.aiChat(openaiModalOpen)} onClick={handleOpenaiModalOpenOnClick}>{ openaiModalOpen ?  <RiCloseLine/>: <RiChatSmileAiLine/> }</div>
+        <div css={s.aiChatLayout(openaiModalOpen)}>
+            <div css={s.aiChatContainer}>
+                <OpenaiApiModal />
+            </div>
+        </div>
     </div>
 }
 

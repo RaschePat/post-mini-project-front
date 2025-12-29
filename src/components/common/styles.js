@@ -170,3 +170,53 @@ export const profileImg = (url) => css`
     background-position: center;
     background-size: cover;
 `
+
+export const aiChat = (isOpen) => css`
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid #aadfff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: #ffffff;
+    background-color: ${isOpen ? "#0080cfff" : "#008ee7"};
+    cursor: pointer;
+
+    &:hover{
+        background-color: #0080cfff;
+    }
+
+    &:active{
+        background-color: #0071b7;
+    }
+`
+
+export const aiChatLayout = (isOpen) => css`
+    transition: all 0.5s ease-in-out;
+    transform: ${isOpen ? "translate(0,0)" : "translate(100%,100%)"};
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: ${isOpen ? 10 : -10};
+    box-sizing: border-box;
+    border-radius: 20px 0 0 20px;
+    padding: 20px;
+    width: 730px;
+    height: 100%;
+    background-color: #f3f5f7;
+    opacity: ${isOpen ? 1 : 0};
+`;
+
+export const aiChatContainer = () => css`
+    box-sizing: border-box;
+    padding-bottom: 30px;
+    width: 100%;
+    height: 100%;
+`;
+
