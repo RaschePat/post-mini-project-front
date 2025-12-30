@@ -6,8 +6,8 @@ export const sendTextOpenai = (message) => {
     const openai = new OpenAI({
         apiKey: openaiApiKey,
         dangerouslyAllowBrowser: true,
+        
     });
-    
         
     return openai.responses.create({
         model: "gpt-4o-mini",
